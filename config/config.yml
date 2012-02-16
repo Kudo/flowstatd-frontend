@@ -1,0 +1,11 @@
+development:
+  flowd_address: 140.123.20.7
+  flowd_port: 9993
+
+production:
+  flowd_address: 140.123.20.7
+  flowd_port: 9993
+
+test:
+  flowd_address: 140.123.20.7
+  flowd_port: 9993

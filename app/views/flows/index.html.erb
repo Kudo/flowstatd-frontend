@@ -1,0 +1,58 @@
+<!-- start content -->
+<div id="content">
+  <div class="post">
+    <table id="ipFlowTable">
+      <thead>
+        <tr>
+          <th class="ui-widget-header ui-corner-all">No.</th>
+          <th class="ui-widget-header ui-corner-all">IP</th>
+          <th class="ui-widget-header ui-corner-all">總流量 (MB)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @flows[:data].each do |flow| %>
+          <tr>
+            <td class="ui-widget-content<%= generateClassName(flow[:sum]) %>"><%= flow[:index] %></td>
+            <% if params[:date] %>
+              <td class="ui-widget-content<%= generateClassName(flow[:sum]) %>"><%= link_to flow[:ip], flow_path(flow[:ip], :date => params[:date]) %></td>
+            <% else %>
+              <td class="ui-widget-content<%= generateClassName(flow[:sum]) %>"><%= link_to flow[:ip], flow_path(flow[:ip]) %></td>
+            <% end %>
+            <td class="ui-widget-content<%= generateClassName(flow[:sum]) %>"><%= flow[:sum] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- end content -->
+<!-- start sidebar -->
+<div id="sidebar">
+  <ul>
+    <li id="calendar-bar">
+    <div id="calendar">
+    </div>
+    </li>
+  </ul>
+</div>
+<!-- end sidebar -->
+
+<% content_for :bottom_js do %>
+<%= javascript_include_tag "jquery.ui" %>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $("#ipFlowTable tr").hover(function() { $("td", $(this)).toggleClass('ui-state-hover'); });
+
+      $("#calendar").datepicker({
+                        maxDate: '+0',
+                        dateFormat: 'yy-mm-dd',
+                        onSelect: function(dateText, inst) {
+                          if (dateText != "<%= @flows[:time].strftime('%Y-%m-%d') %>") {
+                            window.location.href = "<%= url_for(:action => 'index') %>?date="+dateText;
+                          }
+                        }}).datepicker('setDate', "<%= @flows[:time].strftime('%Y-%m-%d') %>");
+
+      setInterval(refreshPage, 600000);
+});
+</script>
+<% end %>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : FronzenAge
+Description: A two-column, fixed-width template suitable for business sites and blogs.
+Version    : 1.0
+Released   : 20071108
+
+-->
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>國立中正大學宿網流量統計</title>
+  <meta name="keywords" content="ccudorm flow">
+  <meta name="description" content="">
+  <!--[if IE]>
+  <style type="text/css">
+  #sidebar #calendar {
+    background-position: 0px 20px;
+  }
+  </style>
+  <![endif]-->
+  <%= stylesheet_link_tag "style" %>
+  <%= stylesheet_link_tag "jquery-ui/jquery.ui.custom" %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <div id="logo">
+    <h1><%= link_to '中正大學宿網流量統計', root_path %></h1>
+    <h2>By <%= link_to 'CNA 校園網路策進會', 'http://www.cna.ccu.edu.tw/' %></h2>
+  </div>
+  <div id="menu">
+    <ul>
+      <li class="first"><%= link_to '首頁', root_path %></li>
+      <li><%= link_to '流量排行', flows_path %></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Contacts</a></li>
+      <li><a href="#">RSS</a></li>
+    </ul>
+    <div id="search">
+      <form method="get" action="<%= url_for(:action => 'query', :controller => 'flows') %>">
+        <fieldset>
+          <input id="s" type="text" name="ip" value="直接依 IP 搜尋" />
+          <input id="x" type="image" src="/images/img10.jpg" />
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <hr />
+  <div id="banner"><%= image_tag 'img04.jpg', { :width => 960, :height => 147 } %></div>
+
+  <!-- start page -->
+  <div id="page">
+
+<%= yield %>
+
+    <!-- start sidebar -->
+    <div id="sidebar">
+      <ul>
+        <li id="calendar-bar">
+        <div id="calendar">
+        </div>
+        </li>
+      </ul>
+    </div>
+  <!-- end sidebar -->
+  </div>
+
+  <!-- end page -->
+  <div id="footer">
+    <p class="legal">Copyright (c) 2011. All rights reserved.</p>
+    <p class="credit">Web Designed by <a href="http://www.nodethirtythree.com/">NodeThirtyThree</a> + <a href="http://www.freecsstemplates.org/">Free CSS Templates</a></p>
+  </div>
+
+<%= yield :bottom_js %>
+</body>
+</html>

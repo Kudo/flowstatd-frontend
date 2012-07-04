@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Flowd::Application.load_tasks
+Flowstatd::Application.load_tasks

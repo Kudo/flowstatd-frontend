@@ -10,15 +10,15 @@
         </tr>
       </thead>
       <tbody>
-        <% @flows[:data].each do |flow| %>
+        <% @flows["data"].each do |flow| %>
           <tr>
-            <td class="ui-widget-content<%= generateClassName(flow[:sum]) %>"><%= flow[:index] %></td>
+            <td class="ui-widget-content<%= generateClassName(flow["total"]) %>"><%= flow["rank"] %></td>
             <% if params[:date] %>
-              <td class="ui-widget-content<%= generateClassName(flow[:sum]) %>"><%= link_to flow[:ip], flow_path(flow[:ip], :date => params[:date]) %></td>
+              <td class="ui-widget-content<%= generateClassName(flow["total"]) %>"><%= link_to flow["ip"], flow_path(flow["ip"], :date => params[:date]) %></td>
             <% else %>
-              <td class="ui-widget-content<%= generateClassName(flow[:sum]) %>"><%= link_to flow[:ip], flow_path(flow[:ip]) %></td>
+              <td class="ui-widget-content<%= generateClassName(flow["total"]) %>"><%= link_to flow["ip"], flow_path(flow["ip"]) %></td>
             <% end %>
-            <td class="ui-widget-content<%= generateClassName(flow[:sum]) %>"><%= flow[:sum] %></td>
+            <td class="ui-widget-content<%= generateClassName(flow["total"]) %>"><%= flow["total"] %></td>
           </tr>
         <% end %>
       </tbody>
@@ -47,10 +47,10 @@
                         maxDate: '+0',
                         dateFormat: 'yy-mm-dd',
                         onSelect: function(dateText, inst) {
-                          if (dateText != "<%= @flows[:time].strftime('%Y-%m-%d') %>") {
+                          if (dateText != "<%= @flows["time"].strftime('%Y-%m-%d') %>") {
                             window.location.href = "<%= url_for(:action => 'index') %>?date="+dateText;
                           }
-                        }}).datepicker('setDate', "<%= @flows[:time].strftime('%Y-%m-%d') %>");
+                        }}).datepicker('setDate', "<%= @flows["time"].strftime('%Y-%m-%d') %>");
 
       setInterval(refreshPage, 600000);
 });

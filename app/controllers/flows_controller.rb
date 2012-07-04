@@ -1,7 +1,7 @@
 class FlowsController < ApplicationController
   def index
-    require 'flowd_client'
-    flow_client_obj = FlowdClient.new(APP_CONFIG['flowd_address'], APP_CONFIG['flowd_port'])
+    require 'flowstatd_client'
+    flow_client_obj = FlowstatdClient.new(APP_CONFIG['flowstatd_address'], APP_CONFIG['flowstatd_port'])
     date = nil
     begin
       require 'date'
@@ -9,11 +9,7 @@ class FlowsController < ApplicationController
     rescue
       date = nil
     end
-    if (date && date < Date.today)
-      @flows = flow_client_obj.get_top_old(50, date)
-    else
-      @flows = flow_client_obj.get_top(50)
-    end
+    @flows = flow_client_obj.get_top(50, date)
 
     if (@flows == nil)
       render :file => "#{RAILS_ROOT}/public/500.html", :layout => false, :status => 500
@@ -21,8 +17,8 @@ class FlowsController < ApplicationController
   end
 
   def show
-    require 'flowd_client'
-    flow_client_obj = FlowdClient.new(APP_CONFIG['flowd_address'], APP_CONFIG['flowd_port'])
+    require 'flowstatd_client'
+    flow_client_obj = FlowstatdClient.new(APP_CONFIG['flowstatd_address'], APP_CONFIG['flowstatd_port'])
     date = nil
     begin
       require 'date'
@@ -30,11 +26,7 @@ class FlowsController < ApplicationController
     rescue
       date = nil
     end
-    if (date && date < Date.today)
-      @flows = flow_client_obj.get_ip_old(params[:id], date)
-    else
-      @flows = flow_client_obj.get_ip(params[:id])
-    end
+    @flows = flow_client_obj.get_ip(params[:id], date)
 
     if (@flows == nil)
       render :file => "#{RAILS_ROOT}/public/500.html", :layout => false, :status => 500

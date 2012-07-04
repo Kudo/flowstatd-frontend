@@ -32,14 +32,14 @@
     for (var h = 0; h < 24; ++h)
       data.setValue(h, 0, h.toString());
     <% if params[:date] %>
-      <% @flows[:data].each do |flow| %>
-          data.setValue(<%= flow[:hour] %>, 1, <%= flow[:sum] %>);
-          data.setValue(<%= flow[:hour] %>, 2, "Hour: <%= flow[:hour] %>\nIncrement Total: <%= flow[:sum] %>\nUpload: <%= flow[:upload] %>\nDownload: <%= flow[:download] %>");
+      <% @flows["data"].each do |flow| %>
+          data.setValue(<%= flow["hour"] %>, 1, <%= flow["incrementalTotal"] %>);
+          data.setValue(<%= flow["hour"] %>, 2, "Hour: <%= flow["hour"] %>\nIncrement Total: <%= flow["incrementalTotal"] %>\nUpload: <%= flow["upload"] %>\nDownload: <%= flow["download"] %>");
       <% end %>
     <% else %>
       <% (0..Time.now.hour).each do |hour| %>
-          data.setValue(<%= hour %>, 1, <%= @flows[:data][hour][:sum] %>);
-          data.setValue(<%= hour %>, 2, "Hour: <%= hour %>\nIncrement Total: <%= @flows[:data][hour][:sum] %>\nUpload: <%= @flows[:data][hour][:upload] %>\nDownload: <%= @flows[:data][hour][:download] %>");
+          data.setValue(<%= hour %>, 1, <%= @flows["data"][hour]["incrementalTotal"] %>);
+          data.setValue(<%= hour %>, 2, "Hour: <%= hour %>\nIncrement Total: <%= @flows["data"][hour]["incrementalTotal"] %>\nUpload: <%= @flows["data"][hour]["upload"] %>\nDownload: <%= @flows["data"][hour]["download"] %>");
       <% end %>
     <% end %>
 
@@ -70,10 +70,10 @@
                         maxDate: '+0',
                         dateFormat: 'yy-mm-dd',
                         onSelect: function(dateText, inst) {
-                          if (dateText != "<%= @flows[:time].strftime('%Y-%m-%d') %>") {
+                          if (dateText != "<%= @flows["time"].strftime('%Y-%m-%d') %>") {
                             window.location.href = "<%= url_for(:action => 'show') %>?date="+dateText;
                           }
-                        }}).datepicker('setDate', "<%= @flows[:time].strftime('%Y-%m-%d') %>");
+                        }}).datepicker('setDate', "<%= @flows["time"].strftime('%Y-%m-%d') %>");
 
       setInterval(refreshPage, 600000);
 });

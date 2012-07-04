@@ -2,7 +2,7 @@ require 'socket'
 require 'date'
 require 'json'
 
-class FlowdClient
+class FlowstatdClient
   def initialize(servAddr, servPort)
     @servAddr = servAddr
     @servPort = servPort

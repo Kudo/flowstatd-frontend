@@ -1,4 +1,4 @@
-Flowd::Application.routes.draw do
+Flowstatd::Application.routes.draw do
   resources :flows, :constraints => {:id => /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/}
   match 'flows/query' => 'flows#query'
   root :to => 'welcome#index'

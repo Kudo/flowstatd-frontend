@@ -1,7 +1,7 @@
 class FlowsController < ApplicationController
   def index
-    require 'flowd_client'
-    flow_client_obj = FlowdClient.new(APP_CONFIG['flowd_address'], APP_CONFIG['flowd_port'])
+    require 'flowstatd_client'
+    flow_client_obj = FlowstatdClient.new(APP_CONFIG['flowstatd_address'], APP_CONFIG['flowstatd_port'])
     date = nil
     begin
       require 'date'
@@ -17,8 +17,8 @@ class FlowsController < ApplicationController
   end
 
   def show
-    require 'flowd_client'
-    flow_client_obj = FlowdClient.new(APP_CONFIG['flowd_address'], APP_CONFIG['flowd_port'])
+    require 'flowstatd_client'
+    flow_client_obj = FlowstatdClient.new(APP_CONFIG['flowstatd_address'], APP_CONFIG['flowstatd_port'])
     date = nil
     begin
       require 'date'

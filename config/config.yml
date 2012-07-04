@@ -1,11 +1,11 @@
 development:
-  flowd_address: 127.0.0.1
-  flowd_port: 9993
+  flowstatd_address: 127.0.0.1
+  flowstatd_port: 9993
 
 production:
-  flowd_address: 127.0.0.1
-  flowd_port: 9993
+  flowstatd_address: 127.0.0.1
+  flowstatd_port: 9993
 
 test:
-  flowd_address: 127.0.0.1
-  flowd_port: 9993
+  flowstatd_address: 127.0.0.1
+  flowstatd_port: 9993

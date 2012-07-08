@@ -6,13 +6,16 @@ class FlowsController < ApplicationController
     begin
       require 'date'
       date = Date.strptime(params[:date], '%Y-%m-%d')
+      if (date == Date.today)
+        date = nil
+      end
     rescue
       date = nil
     end
     @flows = flow_client_obj.get_top(50, date)
 
     if (@flows == nil)
-      render :file => "#{RAILS_ROOT}/public/500.html", :layout => false, :status => 500
+      render :file => ::Rails.root.to_s+"/public/500.html", :layout => false, :status => 500
     end
   end
 
@@ -23,19 +26,22 @@ class FlowsController < ApplicationController
     begin
       require 'date'
       date = Date.strptime(params[:date], '%Y-%m-%d')
+      if (date == Date.today)
+        date = nil
+      end
     rescue
       date = nil
     end
     @flows = flow_client_obj.get_ip(params[:id], date)
 
     if (@flows == nil)
-      render :file => "#{RAILS_ROOT}/public/500.html", :layout => false, :status => 500
+      render :file => ::Rails.root.to_s+"/public/500.html", :layout => false, :status => 500
     end
   end
 
   def query
     if (!params[:ip] || !params[:ip].match(/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/))
-      render :file => "#{RAILS_ROOT}/public/500.html", :layout => false, :status => 500
+      render :file => ::Rails.root.to_s+"/public/500.html", :layout => false, :status => 500
     else
       redirect_to :action => 'show', :id => params[:ip]
     end

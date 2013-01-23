@@ -38,7 +38,6 @@
 <!-- end sidebar -->
 
 <% content_for :bottom_js do %>
-<%= javascript_include_tag "jquery.ui" %>
 <script type="text/javascript">
   $(document).ready(function() {
       $("#ipFlowTable tr").hover(function() { $("td", $(this)).toggleClass('ui-state-hover'); });

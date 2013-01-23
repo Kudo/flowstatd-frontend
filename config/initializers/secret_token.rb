@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Flowstatd::Application.config.secret_token = '42aae3226ba5e3c06c14fb43dade72594c75fc06a4ae9f3aab48609240cf89a703d9b1e51f9684afb786410a43c0367efa8153d1abd756f5a69f879f123e6538'
+FlowstatdFrontend::Application.config.secret_token = '489bd9d359d03ef7b1d5bfc5f0af178b438604eca28c77d175a45d413e124464946e325615916cb97f511c0f04eb83f455d9841eac5d96c91547bd23636a91c3'

@@ -19,7 +19,6 @@
 
 <% content_for :bottom_js do %>
 <%= javascript_include_tag "https://www.google.com/jsapi" %>
-<%= javascript_include_tag "jquery.ui" %>
 <script type="text/javascript">
   google.load('visualization', '1', {'packages':['corechart']});
   google.setOnLoadCallback(drawChart);
